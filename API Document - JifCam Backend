@@ -1,0 +1,947 @@
+API Document - JifCam Backend
+
+
+- Join
+
+Http Verb: POST
+Url: rest-auth/registration/
+Permission: no
+
+Parameter: 
+Field			Type						Description
+
+username		string						Unique Name of customer
+email			string						Email of customer
+password1		string						Password of customer
+password2		string						Confirm of password1
+
+Response:
+
+{
+    "key": "2324d6acd59bb2cfe3d3b45f7fdfa83bb2171845" //auth_token of registered user
+}
+
+- Login
+
+Http Verb: POST
+Url: api/login/
+Permission: no
+
+Parameter: 
+Field			    Type						Description
+
+username		    string						Unique Name of customer
+email(optional)	    string						Email of customer
+password		    string						Password of customer
+
+Response:
+
+{
+    "key": "2324d6acd59bb2cfe3d3b45f7fdfa83bb2171845", //auth_token of logged in user
+    "user_id": 1,
+    "username": "test1"
+}
+
+- Post list
+
+Http Verb: GET
+Url: /posts/
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						auth_token of logged_in user
+
+Response:
+
+[
+    {
+        "id": 1,
+        "title": "123",
+        "author": 2,
+        "video": 9,
+        "created_at": "2019-03-14T15:55:39.417172Z",
+        "updated_at": "2019-03-14T15:55:39.417229Z"
+    }
+]
+
+- Post Detail
+
+Http Verb: GET
+Url: /posts/:id
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						auth_token of logged_in user
+
+
+Response:
+
+{
+    "id": 1,
+    "title": "123",
+    "author": 2,
+    "video": 9,
+    "created_at": "2019-03-14T15:55:39.417172Z",
+    "updated_at": "2019-03-14T15:55:39.417229Z"
+}
+
+- Create new Post
+
+Http Verb: POST
+Url: /posts/
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+title			string						Hashtag of Post
+author			user_id 					Owner of Post
+video			video_id					Video Id
+
+Response:
+
+{
+    "id": 2,
+    "title": "Aws deploy",
+    "author": 3,
+    "video": 10,
+    "created_at": "2019-03-14T19:13:37.227072Z",
+    "updated_at": "2019-03-14T19:13:37.227115Z"
+}
+
+
+- Edit Post
+
+Http Verb: PUT
+Url: /posts/:id/
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+title			string						Hashtag of Post
+author			user_id 					Owner of Post
+video			video_id					Video Id
+
+Response:
+
+{
+    "id": 2,
+    "title": "Aws deploy",
+    "author": 3,
+    "video": 10,
+    "created_at": "2019-03-14T19:13:37.227072Z",
+    "updated_at": "2019-03-14T19:13:37.227115Z"
+}
+
+
+- Delete Post
+
+Http Verb: DELETE
+Url: /posts/:id
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+
+Response:
+
+{
+    
+}
+
+- Video List ( all )
+
+Http Verb: GET
+Url: /videos/
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+
+
+Response:
+
+[
+    {
+        "id": 9,
+        "title": "123",
+        "owner": 1,
+        "file": "http://localhost:8000/media/9650193a-0a03-4c4a-a9c0-91410c420f8d.mp4",
+        "created_at": "2019-03-06T17:42:36.670034Z",
+        "updated_at": "2019-03-06T17:42:36.670067Z"
+    }
+]
+
+- Video Detail
+
+Http Verb: GET
+Url: /videos/:id
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+
+
+Response:
+
+{
+    "id": 9,
+    "title": "123",
+    "owner": 1,
+    "file": "http://localhost:8000/media/9650193a-0a03-4c4a-a9c0-91410c420f8d.mp4",
+    "created_at": "2019-03-06T17:42:36.670034Z",
+    "updated_at": "2019-03-06T17:42:36.670067Z"
+}
+
+- Upload new Video
+
+Http Verb: POST
+Url: /videos/
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+maintag			string						Description of Video		
+owner		    Id							Id of User who uploads this video
+video		    file 						Video File 
+thumbnail		file 						Thumbnail - Image file
+subtags		    Arry of Json                Array of sub tags: example: [ {'breed': 'labrador'}, {..}, ... ]
+
+
+Response:
+
+{
+    "id": 3,
+    "maintag": "Test1",
+    "owner": 2,
+    "video": "http://localhost:8000/media/video/3e22563f-334f-40fe-aa29-a71077d83fdf.mp4",
+    "subtags": null,
+    "thumbnail": "http://localhost:8000/media/thumbs/a2d889b3-08b4-4513-91f0-e50aa1da3eae.png",
+    "created_at": "2019-03-20T16:51:45.398256Z",
+    "updated_at": "2019-03-20T16:51:45.398273Z"
+}
+
+- Delete Video
+
+Http Verb: DELETE
+Url: /videos/:id
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+
+Response:
+
+{
+    
+}
+
+- Edit Video
+
+Http Verb: PUT
+Url: /videos/:id
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+title			string						Description of Video		
+owner_id		Id							Id of User who uploads this video
+video_file		file 						Video File 
+
+
+Response:
+
+{
+    "id": 10,
+    "title": "Aws deploy",
+    "owner": 3,
+    "file": "http://localhost:8000/media/5020a6b4-6148-4b4a-b320-1afb33352894.mp4",
+    "created_at": "2019-03-14T19:05:35.366961Z",
+    "updated_at": "2019-03-14T19:11:09.323008Z"
+}
+
+- Add new Comment
+
+Http Verb: POST
+Url: /comment/
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+author			Integer						Id of Comment owner - user id
+post			Integer						Id of Post
+text			string 						Content of the comment
+
+
+Response:
+
+{
+    "id": 1,
+    "author": 2,
+    "post": 3,
+    "text": "Nice work",
+    "created_at": "2019-03-14T19:17:20.853281Z",
+    "updated_at": "2019-03-14T19:17:20.853325Z"
+}
+
+- Like Post
+
+Http Verb: POST
+Url: /like/
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+like user		Integer						Id of User
+post			Integer						Id of Post
+
+
+Response:
+
+{
+    "id": 1,
+    "like_user": 1,
+    "post": 3,
+    "created_at": "2019-03-14T19:20:05.504896Z",
+    "updated_at": "2019-03-14T19:20:05.504949Z"
+}
+
+- Unlike Post
+
+Http Verb: DELETE
+Url: /like/:id
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+
+Response:
+
+{
+    
+}
+
+- Follow User
+
+Http Verb: POST
+Url: /users/follow/
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+follower		Integer						Id of User who is following someone
+following		Integer						Id of User who is followed by someone
+
+
+Response:
+
+{
+    "id": 1,
+    "follower": 1,
+    "following": 2,
+    "created_at": "2019-03-14T19:22:14.372730Z",
+    "updated_at": "2019-03-14T19:22:14.372809Z"
+}
+
+- Unfollow User
+
+Http Verb: DELETE
+Url: /users/follow/:id
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+
+Response:
+
+{
+   
+}
+
+- Get User Profile Info
+
+Http Verb: GET
+Url: /user/:id
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+
+Response:
+
+{
+    "num_of_posts": 0,
+    "num_of_following": 0,
+    "num_of_followers": 0
+}
+
+
+- Get Post Info
+
+Http Verb: GET
+Url: /post/:id
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+
+Response:
+
+{
+    "num_of_likes": 0,
+    "num_of_comment": 0
+}
+
+- Show PlayList ( All )
+
+Http Verb: GET
+Url: /playlists/
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+
+
+Response:
+
+[
+    {
+        "id": 1,
+        "owner": 1,
+        "video": 10,
+        "created_at": "2019-03-15T18:36:04.809030Z",
+        "updated_at": "2019-03-15T18:36:04.809115Z"
+    },
+    {
+        "id": 2,
+        "owner": 1,
+        "video": 10,
+        "created_at": "2019-03-15T18:36:06.339173Z",
+        "updated_at": "2019-03-15T18:36:06.339198Z"
+    },
+    {
+        "id": 3,
+        "owner": 1,
+        "video": 10,
+        "created_at": "2019-03-15T18:36:08.413215Z",
+        "updated_at": "2019-03-15T18:36:08.413249Z"
+    }
+]
+
+- Show Playlist of User
+
+Http Verb: GET
+Url: /playlist/:user_id
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+
+
+Response:
+
+[
+    {
+        "id": 1,
+        "owner": 1,
+        "video": 10,
+        "created_at": "2019-03-15T18:36:04.809030Z",
+        "updated_at": "2019-03-15T18:36:04.809115Z"
+    },
+    {
+        "id": 2,
+        "owner": 1,
+        "video": 10,
+        "created_at": "2019-03-15T18:36:06.339173Z",
+        "updated_at": "2019-03-15T18:36:06.339198Z"
+    },
+    {
+        "id": 3,
+        "owner": 1,
+        "video": 10,
+        "created_at": "2019-03-15T18:36:08.413215Z",
+        "updated_at": "2019-03-15T18:36:08.413249Z"
+    }
+]
+
+- Add to PlayList
+
+Http Verb: POST
+Url: /playlists/
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+owner           Integer                     Id of User
+video           Integer                     Id of Video
+
+
+Response:
+
+{
+    "id": 4,
+    "owner": 1,
+    "video": 10,
+    "created_at": "2019-03-15T19:04:25.705474Z",
+    "updated_at": "2019-03-15T19:04:25.705550Z"
+}
+
+- Remove from PlayList
+
+Http Verb: DELETE
+Url: /playlists/:id/
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+
+Response:
+
+{
+}
+
+- Like Post-Comment ( level 1 )
+
+Http Verb: POST
+Url: /comments/post/like/
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+like_user       Integer                     Id of User
+comment         Integer                     Id of PostComment
+
+Response:
+
+{
+    "id": 1,
+    "like_user": 1,
+    "comment": 3,
+    "created_at": "2019-03-18T05:41:56.035335Z",
+    "updated_at": "2019-03-18T05:41:56.035411Z"
+}
+
+- Unlike Post-Comment ( level 1 )
+
+Http Verb: DELETE
+Url: comments/post/like/:id/
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+
+Response:
+
+{
+}
+
+- Add new Comment to Post Comment
+
+Http Verb: POST
+Url: /comments/comment/
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+author			Integer						Id of Comment owner - user id
+comment			Integer						Id of PostComment
+text			string 						Content of the comment
+
+
+Response:
+
+{
+    "id": 1,
+    "author": 2,
+    "post": 3,
+    "text": "Nice work",
+    "created_at": "2019-03-14T19:17:20.853281Z",
+    "updated_at": "2019-03-14T19:17:20.853325Z"
+}
+
+- Like Comment-Comment ( level 2 )
+
+Http Verb: POST
+Url: /comments/comment/like/
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+like_user       Integer                     Id of User
+comment         Integer                     Id of Comment-Comment
+
+Response:
+
+{
+    "id": 1,
+    "author": 1,
+    "comment": 1,
+    "text": "123123123123",
+    "created_at": "2019-03-18T06:49:18.454124Z",
+    "updated_at": "2019-03-18T06:49:18.454174Z"
+}
+
+- Unlike Post-Comment ( level 1 )
+
+Http Verb: DELETE
+Url: /comments/comment/like/:id/
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+
+auth_token		string						Auth token of logged in user
+
+Response:
+
+{
+}
+
+
+- Sharing Profile
+
+Http Verb: GET
+Url: /share/profile/:username
+Permission: No token
+
+Parameter: 
+Field			Type						Description
+username        string                      Username of account
+
+Response:
+
+{
+    "username": "test1",
+    "email": "exam@exam.com",
+    "date_joined": "2019-03-14T18:51:50.094321Z",
+    "first_name": "",
+    "last_name": ""
+}
+
+
+- Sharing Video
+
+Http Verb: GET
+Url: /share/video/:videotag
+Permission: No token
+
+Parameter: 
+Field			Type						Description
+videotag        string                      link_ref of the Video
+
+Response:
+
+{
+    "id": 11,
+    "title": "Test1",
+    "owner": 3,
+    "file": "/media/78a121a9-2cd4-4e3e-bfa5-5fac795d0181.mp4",
+    "created_at": "2019-03-20T14:26:58.737830Z",
+    "updated_at": "2019-03-20T14:26:58.737869Z",
+    "link_ref": "58841eae-5c5b-4524-aba6-b09ad68e9505"
+}
+
+
+- Sharing Post
+
+Http Verb: GET
+Url: share/post/:hashtag
+Permission: No token
+
+Parameter: 
+Field			Type						Description
+hashtag         string                      link_ref of the Post
+
+
+Response:
+
+{
+    "id": 3,
+    "title": "fix-3-ssl-certificate",
+    "author": 1,
+    "video": 10,
+    "created_at": "2019-03-14T19:16:53.225299Z",
+    "updated_at": "2019-03-14T19:16:53.225350Z",
+    "link_ref": "b8f90533-805c-42e3-b2b1-3320bdd45106"
+}
+
+
+- Create new Notification Configuration for new user
+
+Http Verb: POST
+Url: /notification/enable/
+Permission: No token
+
+Parameter: 
+Field			Type						Description
+device_id       string                      Device Id
+is_enabled      Boolean                     Permission to enable or disable notification
+duration        Integer                     Duration - hours
+
+
+Response:
+
+{
+    "device_id": "12431243124312431243",
+    "is_enabled": false,
+    "duration": 3,
+    "created_at": "2019-03-20T18:15:54.857890Z",
+    "updated_at": "2019-03-20T18:17:58.538254Z"
+}
+
+
+- Update Notification Configuration for user
+
+Http Verb: PUT
+Url: /notification/enable/:id
+Permission: no token
+
+Parameter: 
+Field			Type						Description
+:id             Integer                     Device Id
+device_id       string                      Device Id
+is_enabled      Boolean                     Permission to enable or disable notification
+duration        Integer                     Duration - hours
+
+
+Response:
+
+{
+    "owner": {
+        "username": "test1",
+        "email": "st.dev0310@gmail.com",
+        "date_joined": "2019-03-20T16:45:18.418472Z",
+        "first_name": "",
+        "last_name": ""
+    },
+    "is_enabled": true,
+    "created_at": "2019-03-20T17:39:20.720917Z",
+    "updated_at": "2019-03-20T17:50:03.422411Z"
+}
+
+
+- Trending - Fetch posts in last 4 hours
+
+Http Verb: GET
+Url: /trending
+Permission: No token
+
+Parameter: 
+
+
+Response:
+
+[
+    {
+        "id": 7,
+        "title": "post1",
+        "author": 2,
+        "video": 2,
+        "created_at": "2019-03-21T23:00:49.203298",
+        "updated_at": "2019-03-21T23:00:49.203311",
+        "link_ref": "91a2c94c-f9dd-4471-9e1d-5adeedf66fd6"
+    },
+    {
+        "id": 8,
+        "title": "post2",
+        "author": 2,
+        "video": 3,
+        "created_at": "2019-03-21T23:02:27.560410",
+        "updated_at": "2019-03-21T23:02:27.560425",
+        "link_ref": "9e6edcdf-0c32-4750-af9e-c6a397c4a408"
+    },
+    {
+        "id": 9,
+        "title": "post3",
+        "author": 3,
+        "video": 4,
+        "created_at": "2019-03-21T23:02:33.262397",
+        "updated_at": "2019-03-21T23:02:33.262433",
+        "link_ref": "70be3789-3bd8-4305-bb4d-e0525ba125ac"
+    }
+]
+
+- Fetch Posts of following users
+
+Http Verb: GET
+Url: following/posts/
+Permission: auth_token
+
+Parameter: 
+Field			Type						Description
+auth_token		string						Auth token of logged in user
+
+Response:
+
+[
+    {
+        "id": 9,
+        "title": "post3",
+        "author": 3,
+        "video": 4,
+        "created_at": "2019-03-21T23:02:33.262397",
+        "updated_at": "2019-03-21T23:02:33.262433",
+        "link_ref": "70be3789-3bd8-4305-bb4d-e0525ba125ac"
+    }
+]
+
+- List of users sorted by amount of posts
+
+Http Verb: GET
+Url: users/most/
+Permission: No token
+
+Parameter: 
+Field			Type						Description
+
+Response:
+
+[
+    {
+        "username": "test1",
+        "email": "st.dev0310@gmail.com",
+        "date_joined": "2019-03-20T16:45:18.418472",
+        "first_name": "",
+        "last_name": ""
+    },
+    {
+        "username": "12312312312",
+        "email": "",
+        "date_joined": "2019-03-20T18:14:10.379171",
+        "first_name": "",
+        "last_name": ""
+    },
+    {
+        "username": "test2",
+        "email": "",
+        "date_joined": "2019-03-21T17:42:06.779027",
+        "first_name": "",
+        "last_name": ""
+    }
+]
+
+
+- Search User by username
+
+Http Verb: POST
+Url: search/user
+Permission: No token
+
+Parameter: 
+Field			Type						Description
+username        string                      search parameter
+
+Response:
+
+[
+    {
+        "username": "test2",
+        "email": "",
+        "date_joined": "2019-03-21T17:42:06.779027",
+        "first_name": "",
+        "last_name": ""
+    },
+    {
+        "username": "test1",
+        "email": "st.dev0310@gmail.com",
+        "date_joined": "2019-03-20T16:45:18.418472",
+        "first_name": "",
+        "last_name": ""
+    }
+]
+
+
+- Download - Redirect to http://jifcam.com/test
+
+Http Verb: POST
+Url: download/
+Permission: No token
+
+Parameter: 
+Field			Type						Description
+
+
+Response:
+
+
+- List of comments on specific post
+
+Http Verb: GET
+Url: comments/:post_id
+Permission: No token
+
+Parameter: 
+Field			Type						Description
+
+
+Response:
+
+[
+    {
+        "id": 1,
+        "author": 2,
+        "post": 7,
+        "text": "sdafasdfasdfasdf",
+        "childs": [
+            {
+                "id": 1,
+                "author": 3,
+                "comment": 1,
+                "text": "asdfasdfasdf",
+                "created_at": "2019-03-22T00:33:13.813705",
+                "updated_at": "2019-03-22T00:33:13.813719"
+            }
+        ],
+        "created_at": "2019-03-22T00:28:44.974099",
+        "updated_at": "2019-03-22T00:28:44.974112"
+    }
+]
