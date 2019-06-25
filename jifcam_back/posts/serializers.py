@@ -1,17 +1,4 @@
-from rest_framework  import serializers
-from django.contrib.auth.models import User
-from .models import (
-                Post, 
-                PostLike, 
-                PostComment, 
-                CommentComment, 
-                Video, 
-                PostCommentLike, 
-                UserFollow, 
-                PlayList, 
-                CommentCommentLike,
-                NotificationPermission
-            )
+
 
 class VideoSerializer(serializers.ModelSerializer):
 
